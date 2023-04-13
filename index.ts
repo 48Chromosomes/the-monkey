@@ -5,6 +5,8 @@ import { openai } from './modules/openai';
 import { CHANNEL_ID } from './consts';
 import { processMessages } from './helpers';
 
+import './modules/express';
+
 client.on('messageCreate', async (message) => {
   const channel = client.channels.cache.get(CHANNEL_ID);
 
