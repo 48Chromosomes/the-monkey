@@ -19,7 +19,7 @@ client.on('messageCreate', async (message) => {
       model: 'gpt-3.5-turbo',
       messages: processedMessages,
       max_tokens: 1000,
-      temperature: 0.8,
+      temperature: 0.5,
     });
 
     const reply: ChatCompletionResponseMessage | '' = completion.data.choices[0].message || '';
