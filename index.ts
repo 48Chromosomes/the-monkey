@@ -11,14 +11,14 @@ client.on('messageCreate', async (message) => {
   const channel = client.channels.cache.get(CHANNEL_ID);
 
   // @ts-ignore
-  const channelMessages = await channel?.messages.fetch({ limit: 20 });
+  const channelMessages = await channel?.messages.fetch({ limit: 2 });
   const processedMessages = processMessages({ channelMessages });
 
   if (message.channelId === CHANNEL_ID && !message.author.bot) {
     const completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: processedMessages,
-      max_tokens: 2000,
+      max_tokens: 1000,
       temperature: 0.8,
     });
 
