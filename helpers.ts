@@ -1,6 +1,6 @@
 import { ChatCompletionRequestMessage, ChatCompletionRequestMessageRoleEnum } from 'openai';
 import { Message } from 'discord.js';
-import { SYSTEM_MESSAGE } from './consts';
+import { SYSTEM_MESSAGE } from './consts/consts';
 
 export const processMessages = ({ channelMessages }: { channelMessages: Message[] }) => {
   const messageList: ChatCompletionRequestMessage[] = [{ role: 'system', content: SYSTEM_MESSAGE }];
