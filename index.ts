@@ -17,7 +17,7 @@ client.on('messageCreate', async (message) => {
   const processedMessages = processMessages({ channelMessages });
 
   if (message.channelId === CHANNEL_ID && !message.author.bot) {
-    const vectorStore = await HNSWLib.load(`vectors/lotuseaters.bin`, new OpenAIEmbeddings());
+    const vectorStore = await HNSWLib.load(`vectors/gigamensch.bin`, new OpenAIEmbeddings());
 
     const chain = makeChain(vectorStore);
 
