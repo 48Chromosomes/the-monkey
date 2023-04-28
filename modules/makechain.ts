@@ -7,7 +7,7 @@ import { CONDENSE_PROMPT, QA_PROMPT } from '../consts/prompts';
 
 export const makeChain = (vectorstore: VectorStore, onTokenStream?: (token: string) => void) => {
   const questionGenerator = new LLMChain({
-    llm: new OpenAIChat({ temperature: 0, maxTokens: 100, modelName: 'gpt-4' }),
+    llm: new OpenAIChat({ temperature: 0, modelName: 'gpt-4' }),
     prompt: CONDENSE_PROMPT,
   });
 
@@ -15,7 +15,6 @@ export const makeChain = (vectorstore: VectorStore, onTokenStream?: (token: stri
     new OpenAIChat({
       temperature: 0,
       modelName: 'gpt-4',
-      maxTokens: 100,
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
