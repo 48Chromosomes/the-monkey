@@ -1,33 +1,32 @@
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { HNSWLib } from 'langchain/vectorstores/hnswlib';
+import { Client, Message, MessageReaction, User } from 'discord.js';
+import cron from 'node-cron';
 
-import { makeChain } from './modules/makechain';
+import { handleMessageReaction } from './modules/roles';
+import { selectUser } from './modules/movieClub';
+import { respondToMessage } from './modules/chat';
 
 import { client } from './modules/discord';
-import { CHANNEL_ID } from './consts/consts';
-import { processMessages } from './helpers';
 
 import './modules/express';
 
-client.on('messageCreate', async (message) => {
-  const channel = client.channels.cache.get(CHANNEL_ID);
+client.on('ready', (client: Client<true>) => {
+	console.log(`Logged in as ${client?.user?.tag}!`);
 
-  // @ts-ignore
-  const channelMessages = await channel?.messages.fetch({ limit: 20 });
-  const processedMessages = processMessages({ channelMessages });
-
-  if (message.channelId === CHANNEL_ID && !message.author.bot) {
-    const vectorStore = await HNSWLib.load(`vectors/gigamensch.bin`, new OpenAIEmbeddings());
-
-    const chain = makeChain(vectorStore);
-
-    const response = await chain.call({
-      question: message.content,
-      chat_history: processedMessages || [],
-    });
-
-    message.reply(response.text);
-  }
+	cron.schedule('0 21 * * SUN', async () => {
+		selectUser(client);
+	});
 });
+
+client.on('messageCreate', async (message: Message) =>
+	respondToMessage(message),
+);
+
+client.on('messageReactionAdd', (reaction: MessageReaction, user: User) =>
+	handleMessageReaction(reaction, user, true),
+);
+
+client.on('messageReactionRemove', (reaction: MessageReaction, user: User) =>
+	handleMessageReaction(reaction, user, false),
+);
 
 client.login(process.env.DISCORD_TOKEN);
