@@ -2,7 +2,7 @@ import {
 	ChatCompletionRequestMessage,
 	ChatCompletionRequestMessageRoleEnum,
 } from 'openai';
-import { Message } from 'discord.js';
+import { Message, Collection } from 'discord.js';
 import { OpenAIChat } from 'langchain/llms/openai';
 import { LLMChain, ChatVectorDBQAChain, loadQAChain } from 'langchain/chains';
 import { VectorStore } from 'langchain/vectorstores';
@@ -11,7 +11,7 @@ import { CONDENSE_PROMPT, QA_PROMPT } from '../consts/prompts';
 import { SYSTEM_MESSAGE } from '../consts/consts';
 
 type ProcessedMessagesProps = {
-	channelMessages: Message[];
+	channelMessages: Collection<string, Message<true>>;
 };
 
 export const processMessages = ({
@@ -25,9 +25,7 @@ export const processMessages = ({
 		const role: ChatCompletionRequestMessageRoleEnum =
 			message.author.username === 'The Monkey' ? 'assistant' : 'user';
 
-		const messageWithContext: string = `[${message.author.username}] ${message.content}`;
-
-		messageList.push({ role, content: messageWithContext });
+		messageList.push({ role, content: message.content });
 	});
 
 	return messageList;
