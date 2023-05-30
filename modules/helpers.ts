@@ -25,7 +25,9 @@ export const processMessages = ({
 		const role: ChatCompletionRequestMessageRoleEnum =
 			message.author.username === 'The Monkey' ? 'assistant' : 'user';
 
-		messageList.push({ role, content: message.content });
+		const messageWithContext: string = `${message.author.username}: "${message.content}"`;
+
+		messageList.push({ role, content: messageWithContext });
 	});
 
 	return messageList;
