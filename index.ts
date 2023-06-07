@@ -21,7 +21,7 @@ client.on('ready', (client: Client<true>) => {
 
 	addMonkeyCommands(client);
 
-	cron.schedule('0 21 * * SUN', async () => {
+	cron.schedule('0 20 * * SUN', async () => {
 		selectUser(client);
 	});
 });

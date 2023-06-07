@@ -1,6 +1,10 @@
 import { Client, TextChannel } from 'discord.js';
 
-import { ME_CHANNEL_ID, MOVIE_CLUB_ROLE_ID, GUILD_ID } from '../consts/consts';
+import {
+	MOVIE_CLUB_CHANNEL_ID,
+	MOVIE_CLUB_ROLE_ID,
+	GUILD_ID,
+} from '../consts/consts';
 
 export const selectUser = async (client: Client<true>) => {
 	const guild = await client.guilds.fetch(GUILD_ID);
@@ -15,11 +19,11 @@ export const selectUser = async (client: Client<true>) => {
 		console.log('Member: ', member.user.username),
 	);
 
-	console.log(membersWithRole.random().user.username);
-
 	const userId = membersWithRole.random().user.id;
 
-	const channel = (await client.channels.fetch(ME_CHANNEL_ID)) as TextChannel;
+	const channel = (await client.channels.fetch(
+		MOVIE_CLUB_CHANNEL_ID,
+	)) as TextChannel;
 
 	channel.send(`<@${userId}> has been selected to choose the next movie.`);
 };
