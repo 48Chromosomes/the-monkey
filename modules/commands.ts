@@ -1,6 +1,6 @@
-import { Client, ChatInputCommandInteraction } from 'discord.js';
+import { Client } from 'discord.js';
 
-import { GUILD_ID } from '../consts/consts';
+const GUILD_ID = process.env.GUILD_ID;
 
 export const addMonkeyCommands = async (client: Client<true>) => {
 	const commandData = {

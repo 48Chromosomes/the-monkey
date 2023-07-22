@@ -20,6 +20,7 @@ client.on('ready', (client: Client<true>) => {
 	console.log(`Logged in as ${client?.user?.tag}!`);
 
 	addMonkeyCommands(client);
+	selectUser(client);
 
 	cron.schedule('0 20 * * SUN', async () => {
 		selectUser(client);

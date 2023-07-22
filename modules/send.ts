@@ -3,11 +3,9 @@ import prompts from 'prompts';
 
 import { client } from './discord';
 
-import {
-	MOVIE_CLUB_CHANNEL_ID,
-	THE_MONKEY_CHANNEL_ID,
-	ME_CHANNEL_ID,
-} from '../consts/consts';
+import { MOVIE_CLUB_CHANNEL_ID, ME_CHANNEL_ID } from '../consts/consts';
+
+const THE_MONKEY_CHANNEL_ID = process.env.THE_MONKEY_CHANNEL_ID;
 
 client.login(process.env.DISCORD_TOKEN);
 
