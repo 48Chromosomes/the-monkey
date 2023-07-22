@@ -1,6 +1,6 @@
 import { Client } from 'discord.js';
 
-const GUILD_ID = process.env.GUILD_ID;
+import { GUILD_ID } from '../consts/consts';
 
 export const addMonkeyCommands = async (client: Client<true>) => {
 	const commandData = {

@@ -22,7 +22,7 @@
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"hnswlib-node": "^1.4.2",
-		"langchain": "^0.0.92",
+		"langchain": "^0.0.56",
 		"node-cron": "^3.0.2",
 		"nodemon": "^2.0.22",
 		"openai": "^3.2.1",

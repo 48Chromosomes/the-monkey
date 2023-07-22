@@ -11,7 +11,7 @@ import { makeChain } from './helpers';
 import { client } from './discord';
 import { processMessages } from './helpers';
 
-const THE_MONKEY_CHANNEL_ID = process.env.THE_MONKEY_CHANNEL_ID;
+import { THE_MONKEY_CHANNEL_ID } from '../consts/consts';
 
 export const respondToMessageWithChain = async (message: Message) => {
 	const channel = client.channels.cache.get(

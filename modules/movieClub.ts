@@ -1,8 +1,10 @@
 import { Client, TextChannel } from 'discord.js';
 
-import { MOVIE_CLUB_CHANNEL_ID, MOVIE_CLUB_ROLE_ID } from '../consts/consts';
-
-const GUILD_ID = process.env.GUILD_ID;
+import {
+	MOVIE_CLUB_CHANNEL_ID,
+	MOVIE_CLUB_ROLE_ID,
+	GUILD_ID,
+} from '../consts/consts';
 
 export const selectUser = async (client: Client<true>) => {
 	const guild = await client.guilds.fetch(GUILD_ID);
